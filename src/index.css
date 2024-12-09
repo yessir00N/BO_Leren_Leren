@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f9;
+  }
+
+  html{
+    font-size: 62.5%
+  }
+  
+  .calendar {
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .weekdays,
+  .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .weekday {
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-weight: bold;
+  }
+  
+  .day,
+  .empty {
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 1.5rem 0.5rem; /* Verhoog de hoogte door padding aan te passen */
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    color: #333;
+    height: 8rem; /* Pas de hoogte aan voor een hogere blok */
+  }
+  
+  .day:hover {
+    background-color: #d4e9f9;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .empty {
+    color: #ccc;
+  }
+  
