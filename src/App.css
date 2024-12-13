@@ -1,56 +1,53 @@
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;  
-}
-
-html{
-  font-size: 62.5%
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: white;
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling */
 }
 
 .container {
   font-family: Arial, sans-serif;
   background-color: #1a1a1a;
   color: white;
-  padding: 1rem;
-  min-height: 100vh; 
-  width: 100%; 
-  display: flex;
-  flex-direction: column; 
-  justify-content: flex-start;
+  padding: 20px;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .calendar-section {
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
   width: 100%;
+  /* Breedte van de website */
 }
 
 .calendar-container {
   width: 100%;
+  /* Kalenderruimte aangepast naar volledige breedte */
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
+
 }
 
 .calendar-header button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1.6rem;
+  font-size: 16px;
+
 }
 
 .calendar-header button:hover {
@@ -60,8 +57,11 @@ html{
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  /* Verdeling over 7 kolommen */
+  gap: 5px;
+  /* Kleinere ruimte tussen dagen */
   width: 100%;
+  /* Brede grid */
 }
 
 .weekday {
@@ -71,14 +71,15 @@ html{
 }
 
 .day {
-  height: 6rem;
+  height: 60px;
+  /* Grotere cellen */
   text-align: center;
   background-color: #f0f0f0;
-  border: 0.1rem solid #ddd;
-  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   cursor: pointer;
   color: #333;
-  font-size: 2rem;
+  font-size: 14px;
 }
 
 .day:hover {
@@ -86,7 +87,8 @@ html{
 }
 
 .empty {
-  height: 6rem;
+  height: 60px;
+  /* Hoogte van lege cellen */
 }
 
 .search-section {
@@ -97,34 +99,36 @@ html{
 }
 
 .search-bar {
-  padding: 1.5rem;
+  padding: 15px;
   width: 100%;
-  max-width: 60rem;
+  max-width: 600px;
+  /* Optioneel om zoekbalk niet te groot te maken */
   border: none;
-  border-radius: 0.5rem;
-  margin-right: 1rem;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .search-button {
-  padding: 1.5rem;
+  padding: 15px;
   background-color: #007bff;
   border: none;
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .buttons-section {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 20px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
   width: 100%;
+  /* Breedte van de website */
 }
 
 .buttons-section button {
-  padding: 1.5rem 2rem;
+  padding: 15px 20px;
   background-color: #3a3a3a;
   color: white;
   border: none;
@@ -139,41 +143,8 @@ html{
 .quote-section {
   text-align: center;
   background-color: #2a2a2a;
-  padding: 2rem;
-  border-radius: 1rem;
-  width: 80%;
-  margin-top: 2rem;
-}
-
-.agenda-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 0.1rem solid #ccc;
-  padding: 2rem;
-  width: 80%; 
-  max-width: 30rem; 
-  box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
-  z-index: 2;
-  max-height: 90vh; 
-  overflow-y: auto; 
-}
-
-.agenda-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-.calendar-section,
-.buttons-section,
-.quote-section,
-.search-section {
-  z-index: 1;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  margin-top: 20px auto 0;
 }
