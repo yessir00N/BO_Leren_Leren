@@ -121,21 +121,24 @@ function App() {
 
       {/* Agenda-popup */}
       {selectedDate && (
-        <div className="agenda-popup">
-          <h4>
-            Agenda voor: {selectedDate}{" "}
-            {new Date(currentYear, currentMonth).toLocaleString("default", {
-              month: "long",
-            })}
-          </h4>
-          <textarea
-            value={newAgendaItem}
-            onChange={(e) => setNewAgendaItem(e.target.value)}
-            placeholder="Voeg een agenda-item toe"
-          ></textarea>
-          <button onClick={handleAgendaSave}>Opslaan</button>
-          <button onClick={() => setSelectedDate(null)}>Annuleren</button>
-        </div>
+        <>
+          <div className="agenda-popup-overlay" onClick={() => setSelectedDate(null)}></div>
+          <div className="agenda-popup">
+            <h4>
+              Agenda voor: {selectedDate}{" "}
+              {new Date(currentYear, currentMonth).toLocaleString("default", {
+                month: "long",
+              })}
+            </h4>
+            <textarea
+              value={newAgendaItem}
+              onChange={(e) => setNewAgendaItem(e.target.value)}
+              placeholder="Voeg een agenda-item toe"
+            ></textarea>
+            <button onClick={handleAgendaSave}>Opslaan</button>
+            <button onClick={() => setSelectedDate(null)}>Annuleren</button>
+          </div>
+        </>
       )}
     </div>
   );

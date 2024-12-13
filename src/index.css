@@ -96,4 +96,36 @@ body {
   .empty {
     color: #ccc;
   }
+
+.container {
+  position: relative;
+}
+
+.agenda-popup {
+  position: fixed; /* Zorg ervoor dat de popup bovenop de content staat */
+  top: 50%; /* Verticaal gecentreerd */
+  left: 50%; /* Horizontaal gecentreerd */
+  transform: translate(-50%, -50%); /* Correcte centrering door verschuiving */
+  background-color: white;
+  border: 0.1rem solid #ccc;
+  padding: 2rem;
+  width: 30rem; 
+  box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
+  z-index: 2; 
+}
+
+.agenda-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1; 
+}
+
+.calendar-section, .buttons-section, .quote-section, .search-section {
+  z-index: 1;
+}
+
   
