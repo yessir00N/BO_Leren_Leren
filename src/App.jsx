@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -10,6 +10,9 @@ function App() {
   const [newAgendaItem, setNewAgendaItem] = useState("");
   const [isEnglish, setIsEnglish] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPomodoroActive, setIsPomodoroActive] = useState(false);
+  const [pomodoroTime, setPomodoroTime] = useState(25 * 60); // 25 minutes in seconds
+  const [isPomodoroPaused, setIsPomodoroPaused] = useState(false);
 
   const audioRef = useRef(null);
 
@@ -57,6 +60,41 @@ function App() {
       }
       setIsPlaying(!isPlaying);
     }
+  };
+
+  const handlePomodoroClick = () => {
+    if (isPomodoroActive) {
+      setIsPomodoroActive(false);
+      setPomodoroTime(25 * 60);
+      setIsPomodoroPaused(false);
+    } else {
+      setIsPomodoroActive(true);
+    }
+  };
+
+  useEffect(() => {
+    let interval;
+    if (isPomodoroActive && pomodoroTime > 0) {
+      interval = setInterval(() => {
+        setPomodoroTime((prevTime) => prevTime - 1);
+      }, 1000);
+    } else if (pomodoroTime === 0) {
+      if (!isPomodoroPaused) {
+        setPomodoroTime(5 * 60); // 5 minutes for pause
+        setIsPomodoroPaused(true);
+      } else {
+        setPomodoroTime(25 * 60);
+        setIsPomodoroActive(false);
+        setIsPomodoroPaused(false);
+      }
+    }
+    return () => clearInterval(interval);
+  }, [isPomodoroActive, pomodoroTime, isPomodoroPaused]);
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
 
   const renderDays = () => {
@@ -123,21 +161,55 @@ function App() {
         <button
           onClick={handleMusicToggle}
           style={{
-            height: "50px", // Matches the height of other buttons
-            width: "50px", // Square button
-            backgroundColor: isPlaying ? "#d9534f" : "#A35C7A", // Red when playing, custom color otherwise
+            height: "50px",
+            width: "50px",
+            backgroundColor: isPlaying ? "#d9534f" : "#A35C7A",
             color: "white",
             border: "none",
-            borderRadius: "50%", // Rounded button
+            borderRadius: "50%",
             cursor: "pointer",
-            display: "flex", // Flexbox for centering
-            alignItems: "center", // Vertical alignment
-            justifyContent: "center", // Horizontal alignment
-            fontSize: "20px", // Icon size
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
           }}
         >
           🎵
         </button>
+        <button
+          onClick={handlePomodoroClick}
+          style={{
+            height: "50px",
+            width: "50px",
+            backgroundColor: isPomodoroActive ? "#d9534f" : "#A35C7A",
+            color: "white",
+            border: "none",
+            borderRadius: "50%",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+          }}
+        >
+          ⏰
+        </button>
+        {isPomodoroActive && (
+          <div
+            style={{
+              marginLeft: "10px",
+              padding: "10px",
+              backgroundColor: "#A35C7A",
+              borderRadius: "5px",
+              fontSize: "18px",
+              color: "white",
+              animation: "popOut 0.3s ease",
+            }}
+          >
+            {isPomodoroPaused ? "Pauze: " : "Timer: "}
+            {formatTime(pomodoroTime)}
+          </div>
+        )}
       </div>
 
       <div className="quote-section">
