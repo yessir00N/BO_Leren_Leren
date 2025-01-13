@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 
 function App() {
@@ -9,6 +9,9 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [newAgendaItem, setNewAgendaItem] = useState("");
   const [isEnglish, setIsEnglish] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const audioRef = useRef(null);
 
   const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -43,6 +46,17 @@ function App() {
     });
     setSelectedDate(null);
     setNewAgendaItem("");
+  };
+
+  const handleMusicToggle = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   const renderDays = () => {
@@ -106,6 +120,24 @@ function App() {
         <button>Pasgebruik</button>
         <button>Favorieten</button>
         <button>Voor jou</button>
+        <button
+          onClick={handleMusicToggle}
+          style={{
+            height: "50px", // Matches the height of other buttons
+            width: "50px", // Square button
+            backgroundColor: isPlaying ? "#d9534f" : "#A35C7A", // Red when playing, custom color otherwise
+            color: "white",
+            border: "none",
+            borderRadius: "50%", // Rounded button
+            cursor: "pointer",
+            display: "flex", // Flexbox for centering
+            alignItems: "center", // Vertical alignment
+            justifyContent: "center", // Horizontal alignment
+            fontSize: "20px", // Icon size
+          }}
+        >
+          🎵
+        </button>
       </div>
 
       <div className="quote-section">
@@ -152,6 +184,8 @@ function App() {
           </div>
         </>
       )}
+
+      <audio ref={audioRef} src="src/music/jazz-lounge-138115.mp3"></audio>
     </div>
   );
 }
