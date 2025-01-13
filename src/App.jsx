@@ -8,6 +8,7 @@ function App() {
   const [agenda, setAgenda] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [newAgendaItem, setNewAgendaItem] = useState("");
+  const [isEnglish, setIsEnglish] = useState(false);
 
   const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -48,12 +49,10 @@ function App() {
     const days = [];
     const totalDays = daysInMonth(currentMonth, currentYear);
 
-    // Empty slots for days before the first day of the month
     for (let i = 0; i < firstDayOfMonth; i++) {
       days.push(<div className="empty" key={`empty-${i}`}></div>);
     }
 
-    // Days of the month
     for (let day = 1; day <= totalDays; day++) {
       const agendaItem = agenda[`${currentYear}-${currentMonth}-${day}`];
       days.push(
@@ -73,7 +72,6 @@ function App() {
 
   return (
     <div className="container">
-      {/* Kalender Sectie */}
       <div className="calendar-section">
         <div className="calendar-container">
           <div className="calendar-header">
@@ -97,13 +95,11 @@ function App() {
         </div>
       </div>
 
-      {/* Zoekbalk Sectie */}
       <div className="search-section">
         <input type="text" placeholder="Zoeken" className="search-bar" />
         <button className="search-button">🔍</button>
       </div>
 
-      {/* Knoppen Sectie */}
       <div className="buttons-section">
         <button>Nieuw</button>
         <button>Trending/ populair</button>
@@ -112,14 +108,30 @@ function App() {
         <button>Voor jou</button>
       </div>
 
-      {/* Quote Sectie */}
       <div className="quote-section">
-        <h3>Quote van de dag</h3>
-        <p>Grote geesten hebben altijd hevige tegenstand ondervonden van middelmatige geesten.</p>
+        <div className="quote-header">
+          <h3>Quote van de dag</h3>
+          <button
+            onClick={() => setIsEnglish(!isEnglish)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "24px",
+              color: "white",
+            }}
+          >
+            🚩
+          </button>
+        </div>
+        <p>
+          {isEnglish
+            ? "Great spirits have always encountered violent opposition from mediocre minds."
+            : "Grote geesten hebben altijd hevige tegenstand ondervonden van middelmatige geesten."}
+        </p>
         <p>- Albert Einstein -</p>
       </div>
 
-      {/* Agenda-popup */}
       {selectedDate && (
         <>
           <div className="agenda-popup-overlay" onClick={() => setSelectedDate(null)}></div>
