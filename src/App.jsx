@@ -124,6 +124,15 @@ function App() {
 
   return (
     <div className="container">
+      <div className="header">
+        <h1 className="header-title">
+          {isEnglish ? "learning-learning" : "leren-leren"}
+        </h1>
+        <button className="language-toggle" onClick={() => setIsEnglish(!isEnglish)}>
+          {isEnglish ? "🇳🇱 Switch to Dutch" : "🇬🇧 Switch to English"}
+        </button>
+      </div>
+  
       <div className="calendar-section">
         <div className="calendar-container">
           <div className="calendar-header">
@@ -146,12 +155,12 @@ function App() {
           </div>
         </div>
       </div>
-
+  
       <div className="search-section">
         <input type="text" placeholder="Zoeken" className="search-bar" />
         <button className="search-button">🔍</button>
       </div>
-
+  
       <div className="buttons-section">
         <button>Nieuw</button>
         <button>Trending/ populair</button>
@@ -211,7 +220,7 @@ function App() {
           </div>
         )}
       </div>
-
+  
       <div className="quote-section">
         <div className="quote-header">
           <h3>Quote van de dag</h3>
@@ -235,7 +244,7 @@ function App() {
         </p>
         <p>- Albert Einstein -</p>
       </div>
-
+  
       {selectedDate && (
         <>
           <div className="agenda-popup-overlay" onClick={() => setSelectedDate(null)}></div>
@@ -256,10 +265,10 @@ function App() {
           </div>
         </>
       )}
-
+  
       <audio ref={audioRef} src="src/music/jazz-lounge-138115.mp3"></audio>
     </div>
-  );
+  );  
 }
 
 export default App;
