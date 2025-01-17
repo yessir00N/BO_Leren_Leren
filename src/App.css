@@ -28,8 +28,6 @@ body {
 }
 
 
-
-
 .header-title {
   margin: 0;
   flex-grow: 1; 
@@ -39,6 +37,12 @@ body {
   transform: translateX(-50%); 
 }
 
+.header:hover{
+  color: orangered;
+  text-shadow: 0 0 25px orangered,
+               0 0 25px orangered;
+  transition: scale(1.1);
+}
 
 .language-toggle, .menu-toggle {
   background: none;
