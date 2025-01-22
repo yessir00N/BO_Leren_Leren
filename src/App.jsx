@@ -13,8 +13,18 @@ function App() {
   const [isPomodoroActive, setIsPomodoroActive] = useState(false);
   const [pomodoroTime, setPomodoroTime] = useState(25 * 60); // 25 minutes in seconds
   const [isPomodoroPaused, setIsPomodoroPaused] = useState(false);
+  const [language, setLanguage] = useState("nl"); // State voor de geselecteerde taal
 
   const audioRef = useRef(null);
+
+  const quotes = {
+    en: "Great spirits have always encountered violent opposition from mediocre minds.",
+    nl: "Grote geesten hebben altijd hevige tegenstand ondervonden van middelmatige geesten.",
+    ru: "Великие умы всегда встречали яростное сопротивление посредственных умов.",
+    it: "I grandi spiriti hanno sempre incontrato una feroce opposizione da parte delle menti mediocri.",
+    de: "Große Geister haben immer heftigen Widerstand von mittelmäßigen Köpfen erfahren.",
+    ar: "العقول العظيمة دائمًا ما تواجه معارضة عنيفة من العقول المتوسطة."
+  };
 
   const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -132,7 +142,7 @@ function App() {
           {isEnglish ? "🇳🇱 Switch to Dutch" : "🇬🇧 Switch to English"}
         </button>
       </div>
-  
+
       <div className="calendar-section">
         <div className="calendar-container">
           <div className="calendar-header">
@@ -140,7 +150,7 @@ function App() {
             <h4>
               {new Date(currentYear, currentMonth).toLocaleString("default", {
                 month: "long",
-              })}{" "}
+              })} {" "}
               {currentYear}
             </h4>
             <button onClick={handleNextMonth}>{">"}</button>
@@ -155,12 +165,12 @@ function App() {
           </div>
         </div>
       </div>
-  
+
       <div className="search-section">
         <input type="text" placeholder="Zoeken" className="search-bar" />
         <button className="search-button">🔍</button>
       </div>
-  
+
       <div className="buttons-section">
         <button>Nieuw</button>
         <button>Trending/ populair</button>
@@ -220,37 +230,29 @@ function App() {
           </div>
         )}
       </div>
-  
+
       <div className="quote-section">
         <div className="quote-header">
           <h3>Quote van de dag</h3>
-          <button
-            onClick={() => setIsEnglish(!isEnglish)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "24px",
-              color: "white",
-            }}
-          >
-            🚩
-          </button>
+          <div className="language-buttons">
+            <button onClick={() => setLanguage("nl")}>🇳🇱</button>
+            <button onClick={() => setLanguage("en")}>🇬🇧</button>
+            <button onClick={() => setLanguage("ru")}>🇷🇺</button>
+            <button onClick={() => setLanguage("it")}>🇮🇹</button>
+            <button onClick={() => setLanguage("de")}>🇩🇪</button>
+            <button onClick={() => setLanguage("ar")}>🇸🇦</button>
+          </div>
         </div>
-        <p>
-          {isEnglish
-            ? "Great spirits have always encountered violent opposition from mediocre minds."
-            : "Grote geesten hebben altijd hevige tegenstand ondervonden van middelmatige geesten."}
-        </p>
+        <p>{quotes[language]}</p>
         <p>- Albert Einstein -</p>
       </div>
-  
+
       {selectedDate && (
         <>
           <div className="agenda-popup-overlay" onClick={() => setSelectedDate(null)}></div>
           <div className="agenda-popup">
             <h4>
-              Agenda voor: {selectedDate}{" "}
+              Agenda voor: {selectedDate} {" "}
               {new Date(currentYear, currentMonth).toLocaleString("default", {
                 month: "long",
               })}
@@ -265,10 +267,10 @@ function App() {
           </div>
         </>
       )}
-  
+
       <audio ref={audioRef} src="src/music/jazz-lounge-138115.mp3"></audio>
     </div>
-  );  
+  );
 }
 
 export default App;
